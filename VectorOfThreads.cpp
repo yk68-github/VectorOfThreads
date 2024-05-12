@@ -14,11 +14,13 @@ int main()
         std::cout << "From Thread ID : " << std::this_thread::get_id() << "\n";
         };
 
-    for (unsigned int i = 0; i < (processor_count - 2); i++)
+    if (processor_count > 3)
     {
-         vecOfThreads.push_back((std::thread(func, 100)));
+        for (unsigned int i = 0; i < (processor_count - 2); i++)
+        {
+            vecOfThreads.push_back((std::thread(func, 100)));
+        }
     }
-
     for (std::thread& th : vecOfThreads)
     {
         if (th.joinable())
